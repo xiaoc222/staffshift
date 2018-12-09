@@ -1,0 +1,49 @@
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	console.log("3333333");
+	$.ajax({
+        type: "GET",
+        url: "getShift",
+        async: true,
+        success: function(r) {
+        	var jsonObj = JSON.parse( r ); 
+            console.log(jsonObj.length);
+            
+            for(i=0;i<jsonObj.length;i++){
+            	var day = jsonObj[i]['day'];
+            	var requiredRole = jsonObj[i]['requiredRole'];
+            	var hours = jsonObj[i]['hours'];
+            	var employeeID = jsonObj[i]['employeeID'];
+            	$("#t1").append("<tr>"+
+            			"<td>"+day+"</td>"+
+            			"<td>"+requiredRole+"</td>"+
+            			"<td>"+hours+"</td>"+
+            			"<td>"+employeeID+"</td>"+
+            			"</tr>");
+            }
+        }
+    });
+
+});
+</script>
+
+<style>
+#jz {
+	margin: 0 auto;
+	width: 320px;
+	height: 100px;
+}
+</style>
+
+<div id="jz">
+	<table border="1" id="t1">
+		<tr>
+			<th>day</th>
+			<th>required role</th>
+			<th>hours</th>
+			<th>employee id</th>
+		</tr>
+	</table>
+</div>
